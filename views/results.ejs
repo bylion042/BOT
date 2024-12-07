@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My BOT</title>
+    <link rel="stylesheet" href="/css/result.css">
+    <link rel="shortcut icon" href="/images/download__1_-removebg-preview.png" type="image/x-icon">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+
+
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <h1>Search Results for <br> "<%= query %>"</h1>
+        </header>
+
+        <!-- Guidance Section -->
+        <section class="guidance">
+            <p id="toggleGuidance">
+                <!-- How to Use This Bot -->
+                <p>Welcome! This bot helps you find news articles about specific forex pairs. Here's how to use it:</p>
+
+                <span id="dropdownArrow" class="arrow"></span>
+            </p>
+            <!-- <div id="guidanceContent" class="guidance-content">
+                <p>Welcome! This bot helps you find news articles about specific forex pairs. Here's how to use it:</p>
+                <ul>
+                    <li>Click "Read More" to view the full article on its original source.</li>
+                    <li>Click the "Bot icon" at the bottom right conner and allow the bot to do its job.</li>
+                    <li>Click "Search" to fetch the latest news articles and see the currency pair's chart.</li>
+                </ul>
+            </div> -->
+        </section>
+
+
+
+        <!-- TradingView Chart Section -->
+        
+
+        <!-- Results Section -->
+        <main class="results">
+             <h3>INFO</h3>
+
+            <% if (error) { %>
+                <div class="error">
+                    <strong>Error:</strong>
+                    <%= error %>
+                </div>
+                <% } else if (news.length> 0) { %>
+                    <ul>
+                        <% news.forEach((item, index)=> { %>
+                            <li>
+                                <h3>
+                                    <%= index + 1 %>. <%= item.title %>
+                                </h3>
+                                <p>
+                                    <%= item.snippet %>
+                                </p>
+                                <a href="<%= item.link %>" target="_blank">Read More</a>
+                            </li>
+                            <% }); %>
+                    </ul>
+                    <% } else { %>
+                        <p>No results found for "<%= query %>".</p>
+                        <% } %>
+        </main>
+
+
+
+
+        <section class="chart-section">
+            <h2>Live Chart for "<%= query %>"</h2>
+            <div id="tradingViewChart" class="chart-container">
+                <iframe id="tradingViewIframe" src="" style="width: 100%; height: 500px; border: none;" allowfullscreen>
+                </iframe>
+            </div>
+        </section>
+    </div>
+
+    <!-- Floating Search Again Icon -->
+    <div id="searchAgain" class="floating-search-again">
+        <i class="fas fa-search"></i>
+    </div>
+
+    <!-- Floating Bot Icon -->
+    <div id="botIcon" class="floating-bot">
+        <i class="fas fa-robot"></i> <!-- Font Awesome robot icon -->
+    </div>
+
+    <!-- Bot Message -->
+    <div id="botMessage" class="bot-message">
+        <p id="botMessageText"></p>
+    </div>
+    
+    <!-- Loading Spinner -->
+    <div id="loadingSpinner" class="loading-spinner" style="display: none;">
+        <button class="close-btn" id="closeBotMessage">&times;</button>
+        <div class="spinner"></div>
+        <p>Fetching the latest data for you...</p>
+    </div>
+
+
+
+
+
+
+    <script>
+        const toggleButton = document.getElementById("toggleGuidance");
+        const guidanceContent = document.getElementById("guidanceContent");
+        const dropdownArrow = document.getElementById("dropdownArrow");
+
+        toggleButton.addEventListener("click", () => {
+            guidanceContent.classList.toggle("show"); // Toggle visibility
+            dropdownArrow.classList.toggle("open"); // Rotate arrow
+        });
+
+        // Get the searched query
+        const query = "<%= query %>";
+
+        // Update the TradingView iframe with the searched currency pair
+        const iframe = document.getElementById("tradingViewIframe");
+        if (query) {
+            const formattedPair = query.replace('/', '').toUpperCase();
+            iframe.src = `https://www.tradingview.com/widgetembed/?frameElementId=tradingview_d345c&symbol=FX:${formattedPair}&interval=D&hide_top_toolbar=true&hide_side_toolbar=true&theme=dark&style=1`;
+        }
+
+        // Floating Search Again functionality
+        const searchAgainIcon = document.getElementById("searchAgain");
+        searchAgainIcon.addEventListener("click", () => {
+            window.location.href = "/";
+        });
+
+        // Floating Bot functionality
+        const botMessageText = document.getElementById("botMessageText");
+        const botMessage = document.getElementById("botMessage");
+        const botIcon = document.getElementById("botIcon");
+        const loadingSpinner = document.getElementById("loadingSpinner");
+        const loadingText = document.getElementById("loadingSpinner").querySelector("p");
+
+        botIcon.addEventListener("click", () => {
+            botMessage.style.display = 'block'; // Show the bot message
+            loadingSpinner.style.display = 'flex'; // Show loading spinner
+            // botMessageText.innerHTML = `Will <strong>${query}</strong>, buy or sell?`;
+
+            // Simulate process with delays (slowed down)
+            setTimeout(() => {
+                loadingText.innerHTML = 'Checking news...';
+            }, 5000);
+
+            setTimeout(() => {
+                loadingText.innerHTML = 'Marking support zone...';
+            }, 10000);
+
+            setTimeout(() => {
+                loadingText.innerHTML = 'Marking resistance zone...';
+            }, 14000);
+
+            setTimeout(() => {
+                loadingText.innerHTML = 'Noting technical analysis...';
+            }, 16000);
+
+            setTimeout(() => {
+                loadingText.innerHTML = 'Back-testing...';
+            }, 17000);
+
+            setTimeout(() => {
+                loadingText.innerHTML = 'Checking key levels...';
+            }, 19000);
+
+            setTimeout(() => {
+                loadingText.innerHTML = 'Rounding up analytics...';
+            }, 21000);
+
+            // Final recommendation (slowed down)
+            setTimeout(() => {
+                const recommendation = Math.random() > 0.5 ? 'BUY' : 'SELL';
+                const recommendationColor = recommendation === 'BUY' ? 'green' : 'red';
+                loadingText.innerHTML = `<span style="color: ${recommendationColor}; font-size: 30px; font-weight: bolder;">${recommendation} ${query}</span>`;
+
+            }, 24000);
+        });
+
+        // Close button functionality
+        const closeButton = document.getElementById("closeBotMessage");
+        closeButton.addEventListener("click", function () {
+            botMessage.style.display = 'none'; // Hide the bot message
+            loadingSpinner.style.display = 'none'; // Hide loading spinner
+        });
+    </script>
+
+</body>
+</html>

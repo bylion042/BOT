@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My BOT</title>
+    <link rel="stylesheet" href="/css/style.css"> 
+    <link rel="shortcut icon" href="/images/download__1_-removebg-preview.png" type="image/x-icon">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+   
+</head>
+<body>
+    <div class="container">
+        <!-- Introductory Section -->
+        <section class="intro">
+            <h1>Welcome to Forex  Bot</h1>
+            <p>
+                This bot helps you find the latest news and updates about forex currency pairs. 
+                Simply enter a currency pair (e.g., EUR/USD) in the search box, and the bot will fetch 
+                the most relevant articles, data and insights for you.
+            </p>
+        </section>
+
+        <!-- Search Form -->
+        <form action="/results" method="get" id="searchForm" onsubmit="showLoading()">
+            <input 
+                type="text" 
+                name="query" 
+                id="query" 
+                placeholder="Enter any currency pair (EUR/USD)" 
+                required
+            >
+        
+        <button type="submit">Search <i class="fas fa-search"></i></button>
+        </form>
+
+        <!-- Loading Spinner -->
+        <div id="loadingSpinner" class="loading-spinner" style="display: none;">
+            <div class="spinner"></div>
+            <p>Fetching the latest data for you...</p>
+        </div>
+
+        <!-- Error Message Example (If any error occurs) -->
+        <% if (error) { %>
+            <div class="alert"><%= error %></div>
+        <% } %>
+
+        <!-- Results Section -->
+        <section class="results">
+            <!-- Here, you can dynamically display the results -->
+        </section>
+    </div>
+
+    <!-- About Icon -->
+    <div class="about-icon" onclick="toggleAboutMessage()">
+        <i class="fas fa-info-circle"></i>
+    </div>
+
+    <!-- About Message -->
+    <div class="about-message" id="aboutMessage">
+        <h4>About Forex Bot</h4>
+        <p>
+            The Forex Bot provides news, technical, and fundamental analysis on currency pairs. It advises whether to BUY or SELL but does not trade for users. Note: Insights may be incorrect; always verify independently.
+        </p>
+    </div>
+
+    <script>
+        // Function to toggle the About message visibility
+        function toggleAboutMessage() {
+            const aboutMessage = document.getElementById("aboutMessage");
+            aboutMessage.style.display = aboutMessage.style.display === "block" ? "none" : "block";
+        }
+
+        // Function to display loading spinner
+        function showLoading() {
+            const spinner = document.getElementById("loadingSpinner");
+            spinner.style.display = "flex"; // Show the spinner while loading
+        }
+    </script>
+</body>
+</html>
