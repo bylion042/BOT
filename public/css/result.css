@@ -4,21 +4,6 @@
     box-sizing: border-box;
 }
 
-/* body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #fff;
-    color: #000;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    background-image: url('/images/Robot-removebg-preview.png');
-    background-position: right;
-    background-repeat: no-repeat;
-    background-size: contain;
-    animation: fadeIn 1s ease-in-out;
-    min-height: 100vh;
-} */
 body {
     font-family: 'Roboto', sans-serif;
     background-color: #ccc;
@@ -89,8 +74,6 @@ li {
     background-color: #f5f5f5;
     margin: 10px;
     padding: 15px;
-    /* font-size: 1rem; */
-    /* font-weight: bold; */
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -148,23 +131,7 @@ iframe {
     margin-bottom: 1rem;
     color: #fff;
 }
-/* 
-.guidance-content {
-    display: none;
-    margin-top: 10px;
-}
 
-.guidance-content.show {
-    display: block;
-}
-
-.guidance h2 {
-    font-size: 1rem;
-    color: #00bcd4;
-    display: flex;
-    gap: 2rem;
-    cursor: pointer;
-} */
 
 
 /* Floating Button Styles */
